@@ -9,7 +9,7 @@
     <div class="header">
         <div class="title"><span><%= title %></span></div>
 
-        <div class="logout-wrapper"><a href="<%= link %>/logout">退出登录</a></div>
+        <div class="logout-wrapper"><a href="/logout">退出登录</a></div>
     </div>
 
     <ul class="content">
@@ -19,9 +19,9 @@
                 <% if(comment_list[i].get('link')) { %>
                     <% var link = comment_list[i].get('link'); %>
                     <% if(link.indexOf("//") != -1) { %>
-                        <a href="" target="_blank" rel="nofollow"> <%= comment_list[i].get('nick') %></a>
+                        <a href="<%= link %>" target="_blank" rel="nofollow"> <%= comment_list[i].get('nick') %></a>
                     <% } else { %>
-                        <a href="" target="_blank" rel="nofollow"> <%= comment_list[i].get('nick') %></a>
+                        <a href="//<%= link %>" target="_blank" rel="nofollow"> <%= comment_list[i].get('nick') %></a>
                     <% } %>
                 <% } else { %>
                     <span id="nick"><%= comment_list[i].get('nick') %></span>
@@ -38,12 +38,12 @@
             </div>
             <div class="check">
                 <% if(comment_list[i].get('isSpam')) { %>
-                <a href="//<%= link %>/comments/not-spam?id=<%= comment_list[i].get('objectId') %>" rel="nofollow">这不是垃圾评论</a>
+                <a href="/comments/not-spam?id=<%= comment_list[i].get('objectId') %>" rel="nofollow">这不是垃圾评论</a>
                 <% } else { %>
-                <a href="//<%= link %>/comments/mark-spam?id=<%= comment_list[i].get('objectId') %>" rel="nofollow">标记为垃圾评论</a>
+                <a href="/comments/mark-spam?id=<%= comment_list[i].get('objectId') %>" rel="nofollow">标记为垃圾评论</a>
                 <% } %>
                 <span class="spacer">•</span>
-                <a class="red" href="//<%= link %>/comments/delete?id=<%= comment_list[i].get('objectId') %>" rel="nofollow">删除</a>
+                <a class="red" href="/comments/delete?id=<%= comment_list[i].get('objectId') %>" rel="nofollow">删除</a>
                 <span class="spacer">•</span>
                 <a class="blue" href="<%= process.env.SITE_URL+comment_list[i].get('url')+'#' + comment_list[i].get('objectId') %>" target="_blank" rel="nofollow">查看评论</a>
                 <% if (comment_list[i].get('rid')) { %>
@@ -51,7 +51,7 @@
                 <span class="spacer">•</span><span class="vtime">通知已送达</span>
                 <% } else { %>
                 <span class="spacer">•</span>
-                <a href="//<%= link %>/comments/resend-email?id=<%= comment_list[i].get('objectId') %>" rel="nofollow">重发通知邮件</a>
+                <a href="/comments/resend-email?id=<%= comment_list[i].get('objectId') %>" rel="nofollow">重发通知邮件</a>
                 <% } %>
                 <% } %>
             </div>
